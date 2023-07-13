@@ -10,7 +10,7 @@ public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String title;
     @Column(name = "game_year") // renomeado a coluna "year" para evitar erros com o banco de dados
     private Integer year;
@@ -18,18 +18,15 @@ public class Game {
     private String platforms;
     private Double score;
     private String imgUrl;
-
     @Column(columnDefinition = "TEXT")
-
     private String shortDescription;
-
     @Column(columnDefinition = "TEXT") // permite que o banco identifique que é um texto e nao um varchar de 255 caracteres
     private String longDescription;
 
 
     public Game(){}
 
-    public Game(long id,
+    public Game(Long id,
                 String title,
                 Integer year,
                 String genre,
@@ -49,7 +46,7 @@ public class Game {
         this.longDescription = longDescription;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
