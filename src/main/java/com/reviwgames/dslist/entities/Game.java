@@ -12,13 +12,18 @@ public class Game {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    @Column(name = "game_year")
+    @Column(name = "game_year") // renomeado a coluna "year" para evitar erros com o banco de dados
     private Integer year;
     private String genre;
     private String platforms;
     private Double score;
     private String imgUrl;
+
+    @Column(columnDefinition = "TEXT")
+
     private String shortDescription;
+
+    @Column(columnDefinition = "TEXT") // permite que o banco identifique que é um texto e nao um varchar de 255 caracteres
     private String longDescription;
 
 
