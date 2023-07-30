@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/games")
+@RestController // anotaçao para indicar que esta classe é um controlador Rest
+@RequestMapping(value = "/games") // vai mapear a classe com o /games
 public class GameController {
 
 
     @Autowired
-    private GameService gameService;
+    private GameService gameService; // injeção de dependencia do Service
 
-    //GetMapping-> usado para mapear requisicoes GET usadas nos controllers
+    //GetMapping(value = "")-> usado para mapear requisicoes GET usadas nos controllers
     //passando um id como argumento na rota, que sera redirecionado para as configuracoes da classe
     @GetMapping(value = "/{id}")
     public GameDTO findById(@PathVariable Long id){
         GameDTO result = gameService.findById(id);
         return result;
     }
-
+    //GetMapping->  retorno padrao para o RequestMapping
     @GetMapping
     public List<GameMinDTO> findAll(){
         List<GameMinDTO> result = gameService.findAll();

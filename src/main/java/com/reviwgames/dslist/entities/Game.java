@@ -4,15 +4,17 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity
-@Table(name = "tb_game")
+@Entity // registra no ORM
+@Table(name = "tb_game") // nomea na tabela do banco de dados
 public class Game {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //estrategia de geracao de ID autoincremental
     private Long id;
     private String title;
-    @Column(name = "game_year") // renomeado a coluna "year" para evitar erros com o banco de dados
+
+    // renomeado a coluna "year" para evitar erros com o banco de dados
+    @Column(name = "game_year")
     private Integer year;
     private String genre;
     private String platforms;
@@ -20,7 +22,9 @@ public class Game {
     private String imgUrl;
     @Column(columnDefinition = "TEXT")
     private String shortDescription;
-    @Column(columnDefinition = "TEXT") // permite que o banco identifique que é um texto e nao um varchar de 255 caracteres
+
+    // permite que o banco identifique que é um texto e nao um varchar de 255 caracteres
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
 
@@ -122,7 +126,7 @@ public class Game {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Game game)) return false;
-        return id == game.id;
+        return Objects.equals(id, game.id);
     }
 
     @Override

@@ -11,8 +11,10 @@ import java.util.Objects;
 @Table(name = "tb_belonging")
 public class Belonging {
 
+    /*indica que uma classe é incorporada, ou seja, ela representa uma parte de um
+    objeto maior que é armazenado como um único valor no banco de dados*/
     @EmbeddedId
-    private BelongingPK id = new BelongingPK();
+    private BelongingPK id = new BelongingPK(); // deve ser iniciado para nao começar como nulo
     private Integer position;
 
     public Belonging(){}
