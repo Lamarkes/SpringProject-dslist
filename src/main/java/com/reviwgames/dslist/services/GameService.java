@@ -4,6 +4,7 @@ package com.reviwgames.dslist.services;
 import com.reviwgames.dslist.dto.GameDTO;
 import com.reviwgames.dslist.dto.GameMinDTO;
 import com.reviwgames.dslist.entities.Game;
+import com.reviwgames.dslist.projections.GameMinProjection;
 import com.reviwgames.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,15 @@ public class GameService {
         // busca todos os Games registrados por meio do gameReposiroty no bd e converte em uma List
         List<Game> result = gameRepository.findAll();
         // converte a variavel result do tipo Game para GameMinDTO por meio de stream()
+        return result.stream().map(GameMinDTO::new).toList();
+
+    }
+
+    @Transactional(readOnly = true) // comentar sobre
+    public List<GameMinDTO> findByList(Long listId){
+        // busca todos os GameMinProject registrados por meio do gameReposiroty no bd e converte em uma List
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
+        // converte a variavel result do tipo GameMinProject para GameMinDTO por meio de stream()
         return result.stream().map(GameMinDTO::new).toList();
 
     }
