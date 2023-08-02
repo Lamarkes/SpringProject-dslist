@@ -2,6 +2,9 @@
 
 site do intensivão: https://devsuperior.com.br
 
+## Sobre:
+Projeto realizado durante os dias do Intensivão Java Spring, com intuito de desenvolver uma API REST de listas de jogos dividida por categotias, por exemplo RPG e Plataforma, tendo algumas funcionalidades básicas.
+
 
 ## Modelo de domínio DSList
 
