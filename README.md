@@ -1,5 +1,6 @@
 # Projeto DSList - Intensivão Java Spring
-
+[![made-with-python](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://www.oracle.com/br/java/technologies/downloads/)
+![Status](https://img.shields.io/badge/STATUS-COMPLETE-<COLOR>.svg)<br>
 site do intensivão: https://devsuperior.com.br
 
 ## Sobre:
