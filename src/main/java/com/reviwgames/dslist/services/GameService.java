@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 
 /*@Service -> e indica que a classe é um componente a ser gerenciado pelo Spring.
@@ -45,5 +46,11 @@ public class GameService {
         // converte a variavel result do tipo GameMinProject para GameMinDTO por meio de stream()
         return result.stream().map(GameMinDTO::new).toList();
 
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> remove(Long id){
+        Optional<Game> result = gameRepository.findById(id);
+        return result.stream().map(GameMinDTO::new).toList();
     }
 }

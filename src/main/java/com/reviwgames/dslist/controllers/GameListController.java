@@ -6,6 +6,7 @@ import com.reviwgames.dslist.dto.ReplacementDTO;
 import com.reviwgames.dslist.services.GameListService;
 import com.reviwgames.dslist.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,9 +25,9 @@ public class GameListController {
     //GetMapping-> usado para mapear requisicoes GET usadas nos controllers
     //passando um id como argumento na rota, que sera redirecionado para as configuracoes da classe
     @GetMapping
-    public List<GameListDTO> findAll(){
+    public ResponseEntity findAll(){
         List<GameListDTO> result = gameListService.findAll();
-        return result;
+        return ResponseEntity.ok().body(result);
     }
 
     @GetMapping(value = "/{listId}/games")
