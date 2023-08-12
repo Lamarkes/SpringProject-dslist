@@ -22,7 +22,11 @@ public class GameController {
     @GetMapping(value = "/{id}")
     public ResponseEntity findById(@PathVariable Long id){
         GameDTO result = gameService.findById(id);
+        if (result != null){
         return ResponseEntity.ok().body(result);
+        }else {
+            return ResponseEntity.notFound().build();
+        }
     }
     //GetMapping->  retorno padrao para o RequestMapping
     @GetMapping
@@ -31,10 +35,8 @@ public class GameController {
         return ResponseEntity.ok().body(result);
     }
 
-
   @DeleteMapping(value = "/{id}")
    public ResponseEntity remove(@PathVariable Long id){
-
         if (gameService.findById(id) != null){
             gameService.remove(id);
             return ResponseEntity.noContent().build();

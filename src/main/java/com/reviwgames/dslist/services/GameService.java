@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 
@@ -28,9 +29,14 @@ public class GameService {
 
     @Transactional(readOnly = true) // é usada quando você deseja apenas ler os dados durante a transação e não modificar nada
     public GameDTO findById(Long id){
-        Game result = gameRepository.findById(id).get(); // busca o game por id e armazena na variavel result
-        return new GameDTO(result); // converte o game na variavel result em um gameDTO
-    }
+        Optional<Game> result = gameRepository.findById(id); // busca o game por id e armazena na variavel result
+        if (result.isPresent()) {
+            return new GameDTO(result.get()); // converte o game na variavel result em um gameDTO
+        }else {
+            throw new EntityNotFoundException();
+        }
+        }
+
     @Transactional(readOnly = true)
     public List<GameMinDTO> findAll(){
         // busca todos os Games registrados por meio do gameReposiroty no bd e converte em uma List
