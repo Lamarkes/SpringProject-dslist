@@ -6,6 +6,7 @@ import com.reviwgames.dslist.dto.GameMinDTO;
 import com.reviwgames.dslist.entities.Game;
 import com.reviwgames.dslist.projections.GameMinProjection;
 import com.reviwgames.dslist.repositories.GameRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,7 @@ public class GameService {
     @Autowired
     private GameRepository gameRepository;
 
-    @Transactional(readOnly = true) // esta anotaçao garante que a operaação com o bd aconteça
+    @Transactional(readOnly = true) // é usada quando você deseja apenas ler os dados durante a transação e não modificar nada
     public GameDTO findById(Long id){
         Game result = gameRepository.findById(id).get(); // busca o game por id e armazena na variavel result
         return new GameDTO(result); // converte o game na variavel result em um gameDTO
@@ -48,9 +49,12 @@ public class GameService {
 
     }
 
-    @Transactional(readOnly = true)
-    public List<GameMinDTO> remove(Long id){
-        Optional<Game> result = gameRepository.findById(id);
-        return result.stream().map(GameMinDTO::new).toList();
+    public void remove(Long id){ // neste caso a classe so tem objetivo de excluir e nao é necessario retornar nada
+        Optional<Game> optionalGame = gameRepository.findById(id);
+        if (optionalGame.isPresent()){
+            gameRepository.delete(optionalGame.get());
+        }else {
+            throw new EntityNotFoundException();
+        }
     }
 }

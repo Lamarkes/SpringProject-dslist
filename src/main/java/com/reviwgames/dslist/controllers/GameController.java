@@ -31,10 +31,16 @@ public class GameController {
         return ResponseEntity.ok().body(result);
     }
 
-    // fase de testes
-//    @DeleteMapping(value = "/{id}")
-//    public ResponseEntity remove(@PathVariable Long id){
-//        gameService.remove(id);
-//        return ResponseEntity.ok().build();
-//    }
+
+  @DeleteMapping(value = "/{id}")
+   public ResponseEntity remove(@PathVariable Long id){
+
+        if (gameService.findById(id) != null){
+            gameService.remove(id);
+            return ResponseEntity.noContent().build();
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+
+    }
 }
